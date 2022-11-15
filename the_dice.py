@@ -4,8 +4,8 @@ import config
 
 
 
-X_OFFSET = config.widthsm/3 #width/2#297 
-Y_OFFSET = config.heightsm/3#448
+X_OFFSET = config.width/2 #width/2#297 
+Y_OFFSET = config.height/2-3#448
 DOT_SIZE = 4
 
 

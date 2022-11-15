@@ -12,19 +12,20 @@ screen.setup(config.width, config.height)
 
 image = Image.open("IMG_20221115_120137.png")
 imagebwlow = image.convert("RGB")
-size = config.widthsm/20, config.heightsm/20
+size = config.widthsm/config.detail, config.heightsm/config.detail
 imagebwlow.thumbnail(size, Image.Resampling.LANCZOS)
 imagebwlow.show()
-width,hight = imagebwlow.size
-print(hight)
-print(width)
+print(config.height)
+print(config.width)
+print(config.heightsm/config.detail)
+print(config.widthsm/config.detail)
 f = open("output.txt", "w")
 x,y = 0,0
-while y < config.heightsm/20*12:
+while y < config.height:
     rgb = imagebwlow.getpixel((x/12,y/12))
     r,g,b = rgb
     a = sum([r,g,b])/3
-    if x >= config.widthsm/20*12-12:
+    if x >= config.width-12:
         y+=12
         x=0
         f.write("\n")
@@ -34,34 +35,33 @@ while y < config.heightsm/20*12:
         x+=12
 f.close()
 x,y = 0,0
-while y<config.heightsm/20*12:
+while y<config.height:
     rgb = imagebwlow.getpixel((x/12,y/12))
     r,g,b = rgb
     a = sum([r,g,b])/3
     #rgb= (0,0,0)
-    if x >= config.widthsm/20*12-12:
+    if x >= config.width-12: 
         y+=12
         x=0
-    '''if a <= 3:
-        pass
-        x+=12'''
-    if a <=42:
-        sixSide(x,y,rgb)
+    if a <= 2:
+        x+=12
+    elif a <=42:
+        sixSide(x-300,y,rgb)
         x+=12
     elif a <=42*2:
-        fiveSide(x,y,rgb)
+        fiveSide(x-300,y,rgb)
         x+=12
     elif a <=42*3:
-        fourSide(x,y,rgb)
+        fourSide(x-300,y,rgb)
         x+=12
     elif a <= 42*4:
-        threeSide(x,y,rgb)
+        threeSide(x-300,y,rgb)
         x+=12
     elif a <= 42*5:
-        twoSide(x,y,rgb)
+        twoSide(x-300,y,rgb)
         x+=12
     elif a <= 42*6:
-        oneSide(x,y,rgb)
+        oneSide(x-300,y,rgb)
         x+=12
 
 screen.exitonclick()
